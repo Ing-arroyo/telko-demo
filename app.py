@@ -1,4 +1,3 @@
-
 import streamlit as st
 import sqlite3
 import pandas as pd
@@ -571,14 +570,16 @@ def render_sale_form():
         ins_check = st.checkbox("¿Incluye Seguro?", value=bool(sale_data.get('has_insurance', 0)))
         acc_check = st.checkbox("¿Incluye Accesorios?", value=bool(sale_data.get('has_accessories', 0)))
         
-        # Campos de accesorios (solo visibles si se marca el checkbox)
+        # Campos de accesorios (siempre visibles)
         col_acc1, col_acc2 = st.columns(2)
         with col_acc1:
             acc_name = st.text_input("Nombre del Accesorio", value=sale_data.get('accessory_name', ""), 
-                                     disabled=not acc_check, placeholder="Ej: Funda, Cargador, etc.")
+                                     placeholder="Ej: Funda, Cargador, etc.",
+                                     help="Solo se guardará si marca el checkbox de accesorios")
         with col_acc2:
             acc_code = st.text_input("Código del Accesorio", value=sale_data.get('accessory_code', ""), 
-                                    disabled=not acc_check, placeholder="Ej: ACC-001")
+                                    placeholder="Ej: ACC-001",
+                                    help="Solo se guardará si marca el checkbox de accesorios")
         
         st.divider()
         
